@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mar y Sol · Inmobiliaria Mallorca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sea:#0b2624; --sea-2:#0e3330; --sand:#f3ede0; --sand-dim:#ccc3ac;
+    --gold:#c6a15b; --gold-bright:#d9b876; --terra:#bd5a34; --ink:#071917;
+    --line:rgba(243,237,224,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--sea); color:var(--sand);
+    font-family:"Manrope",system-ui,sans-serif; font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif; font-weight:500; letter-spacing:.01em}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;border-bottom:1px solid var(--line)}
+  .brand{font-family:"Cormorant Garamond",serif;font-size:26px;letter-spacing:.06em}
+  .brand b{color:var(--gold);font-weight:600}
+  .nav-links{display:flex;gap:30px;font-size:14px;letter-spacing:.04em;color:var(--sand-dim)}
+  .nav-links span{cursor:default}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* hero */
+  .hero{position:relative;padding:92px 0 70px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(1100px 540px at 78% -8%, rgba(198,161,91,.20), transparent 60%),
+      radial-gradient(700px 500px at 8% 110%, rgba(189,90,52,.16), transparent 55%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+  .hero h1{font-size:clamp(44px,7vw,86px);line-height:1.02;margin:0 0 22px;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--gold-bright)}
+  .lede{font-size:19px;max-width:50ch;color:var(--sand-dim);margin:0 0 34px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:2px;
+       font-weight:600;font-size:14px;letter-spacing:.03em;text-decoration:none;cursor:pointer;border:none}
+  .btn-gold{background:var(--gold);color:var(--ink)}
+  .btn-gold:hover{background:var(--gold-bright)}
+  .btn-ghost{background:transparent;color:var(--sand);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold)}
+
+  /* listings */
+  section{padding:74px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:40px}
+  .sec-head h2{font-size:clamp(30px,4vw,46px);margin:0}
+  .sec-head p{color:var(--sand-dim);margin:0;font-size:15px;max-width:36ch}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--sea-2);border:1px solid var(--line);border-radius:3px;overflow:hidden;
+        display:flex;flex-direction:column}
+  .card .ph{height:188px;position:relative}
+  .ph.p1{background:linear-gradient(150deg,#13524a,#0a2c2a 70%)}
+  .ph.p2{background:linear-gradient(150deg,#7a4a2c,#2a1a12 75%)}
+  .ph.p3{background:linear-gradient(150deg,#1d5e6b,#0a2730 72%)}
+  .ph .tag{position:absolute;top:14px;left:14px;background:rgba(7,25,23,.66);backdrop-filter:blur(4px);
+           color:var(--gold-bright);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:6px 11px;border-radius:2px}
+  .card .body{padding:20px 20px 24px}
+  .card h3{margin:0 0 4px;font-size:25px}
+  .card .loc{color:var(--sand-dim);font-size:13px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:14px}
+  .card .meta{display:flex;gap:16px;font-size:13px;color:var(--sand-dim);border-top:1px solid var(--line);padding-top:14px;margin-top:auto}
+  .card .price{font-family:"Cormorant Garamond",serif;font-size:26px;color:var(--gold);margin-top:14px}
+
+  footer{padding:46px 0;border-top:1px solid var(--line);color:var(--sand-dim);font-size:13px;
+         display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+
+  /* ---- chat widget ---- */
+  .launcher{position:fixed;right:24px;bottom:24px;z-index:60;display:flex;align-items:center;gap:12px;
+            background:var(--gold);color:var(--ink);border:none;cursor:pointer;border-radius:50px;
+            padding:14px 20px 14px 16px;font-family:"Manrope";font-weight:700;font-size:14px;
+            box-shadow:0 14px 40px rgba(0,0,0,.4);transition:transform .15s}
+  .launcher:hover{transform:translateY(-2px);background:var(--gold-bright)}
+  .launcher .dot{width:9px;height:9px;border-radius:50%;background:#1f7a4d;box-shadow:0 0 0 4px rgba(31,122,77,.25)}
+
+  .panel{position:fixed;right:24px;bottom:24px;z-index:61;width:390px;max-width:calc(100vw - 32px);
+         height:600px;max-height:calc(100vh - 40px);background:var(--sea-2);border:1px solid var(--line);
+         border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden}
+  .panel.open{display:flex}
+  .p-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;background:var(--sea)}
+  .p-head .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(140deg,var(--gold),var(--terra));
+              display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:20px;color:var(--ink);font-weight:600}
+  .p-head .t{flex:1}
+  .p-head .t b{display:block;font-size:15px}
+  .p-head .t small{color:var(--sand-dim);font-size:12px}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--sand-dim)}
+  .status .s-dot{width:7px;height:7px;border-radius:50%;background:#888}
+  .status.live .s-dot{background:#34c77b}
+  .status.demo .s-dot{background:var(--gold)}
+  .p-close{background:none;border:none;color:var(--sand-dim);font-size:22px;cursor:pointer;line-height:1;padding:4px}
+
+  .msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px}
+  .msg{max-width:84%;padding:11px 14px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+  .msg.bot{align-self:flex-start;background:var(--sea);border:1px solid var(--line);border-bottom-left-radius:4px}
+  .msg.me{align-self:flex-end;background:var(--gold);color:var(--ink);border-bottom-right-radius:4px;font-weight:500}
+  .typing{align-self:flex-start;color:var(--sand-dim);font-size:13px;padding:4px 6px}
+  .typing i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--sand-dim);margin-right:3px;animation:b 1s infinite}
+  .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+  @keyframes b{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+  .lead{border-top:1px solid var(--line);padding:10px 16px;background:var(--sea);display:none}
+  .lead.show{display:block}
+  .lead .lh{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .lead .lh .q{margin-left:auto;font-size:10px;letter-spacing:.08em;padding:2px 8px;border-radius:20px;background:rgba(52,199,123,.16);color:#5fd99a}
+  .lead .lh .q.no{background:rgba(255,255,255,.06);color:var(--sand-dim)}
+  .lead .rows{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;font-size:12.5px}
+  .lead .rows div{display:flex;justify-content:space-between;gap:8px;color:var(--sand-dim);border-bottom:1px dotted var(--line);padding:3px 0}
+  .lead .rows b{color:var(--sand);font-weight:600;text-align:right}
+
+  .composer{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--sea-2)}
+  .composer input{flex:1;background:var(--sea);border:1px solid var(--line);color:var(--sand);
+                  border-radius:22px;padding:11px 16px;font-family:"Manrope";font-size:14px;outline:none}
+  .composer input:focus{border-color:var(--gold)}
+  .composer button{background:var(--gold);border:none;color:var(--ink);width:42px;height:42px;border-radius:50%;
+                   cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center}
+  .composer button:hover{background:var(--gold-bright)}
+  .nudges{display:flex;gap:7px;flex-wrap:wrap;padding:0 12px 12px;background:var(--sea-2)}
+  .nudge{font-size:12px;color:var(--sand-dim);border:1px solid var(--line);background:transparent;border-radius:20px;
+         padding:6px 12px;cursor:pointer}
+  .nudge:hover{border-color:var(--gold);color:var(--sand)}
+  .powered{text-align:center;font-size:10.5px;letter-spacing:.1em;color:var(--sand-dim);padding:0 0 9px;background:var(--sea-2)}
+  .powered b{color:var(--gold)}
+</style>
+</head>
+<body>
+  <header class="wrap">
+    <nav>
+      <div class="brand">Mar y Sol <b>·</b> Inmobiliaria</div>
+      <div class="nav-links"><span>Objekte</span><span>Verkaufen</span><span>Über uns</span><span>Kontakt</span></div>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Mallorca · Südwest & Serra de Tramuntana</div>
+      <h1>Leben, wo andere <em>Urlaub</em> machen.</h1>
+      <p class="lede">Kuratierte Fincas, Villen und Penthäuser an Mallorcas schönsten Lagen — persönlich begleitet, dreisprachig betreut.</p>
+      <div class="cta-row">
+        <button class="btn btn-gold" onclick="openChat()">Anfrage stellen →</button>
+        <a class="btn btn-ghost" href="#objekte">Objekte ansehen</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="objekte">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Ausgewählte Objekte</h2>
+        <p>Ein Auszug aus unserem Portfolio. Off-Market-Objekte auf Anfrage.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="ph p1"><span class="tag">Neu</span></div>
+          <div class="body">
+            <h3>Villa Lluna</h3>
+            <div class="loc">Santa Ponça · Meerblick</div>
+            <div>4 Schlafzimmer · Pool · 320 m² · Garten 900 m²</div>
+            <div class="price">3.450.000 €</div>
+            <div class="meta"><span>Ref. MS-204</span><span>Kauf</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="ph p2"><span class="tag">Finca</span></div>
+          <div class="body">
+            <h3>Finca Es Pinar</h3>
+            <div class="loc">Pollença · Landidylle</div>
+            <div>5 Schlafzimmer · Olivenhain · 410 m² · 14.000 m² Land</div>
+            <div class="price">2.190.000 €</div>
+            <div class="meta"><span>Ref. MS-187</span><span>Kauf</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="ph p3"><span class="tag">Penthouse</span></div>
+          <div class="body">
+            <h3>Ático Marina</h3>
+            <div class="loc">Port d'Andratx · Hafen</div>
+            <div>3 Schlafzimmer · Dachterrasse · 180 m² · Liegeplatz opt.</div>
+            <div class="price">2.850.000 €</div>
+            <div class="meta"><span>Ref. MS-231</span><span>Kauf</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    <span>Mar y Sol Inmobiliaria · Port d'Andratx, Mallorca · (Demo-Objekt von nøho studio)</span>
+    <span>DE · EN · ES</span>
+  </footer>
+
+  <!-- Chat -->
+  <button class="launcher" id="launcher" onclick="openChat()"><span class="dot"></span> Fragen? Jetzt chatten</button>
+
+  <div class="panel" id="panel">
+    <div class="p-head">
+      <div class="av">M</div>
+      <div class="t">
+        <b>Marisol · Assistentin</b>
+        <small><span class="status demo" id="status"><span class="s-dot"></span><span id="statusText">Demo-Modus</span></span></small>
+      </div>
+      <button class="p-close" onclick="closeChat()">×</button>
+    </div>
+
+    <div class="msgs" id="msgs"></div>
+
+    <div class="lead" id="lead">
+      <div class="lh">Lead-Erfassung
+        <span class="q no" id="qBadge">offen</span>
+      </div>
+      <div class="rows" id="leadRows"></div>
+    </div>
+
+    <div class="nudges" id="nudges">
+      <button class="nudge" onclick="quick('Hola, busco una villa con vista al mar')">🇪🇸 Villa con vista al mar</button>
+      <button class="nudge" onclick="quick('Hi, looking for a finca near Pollença, budget around 2M')">🇬🇧 Finca near Pollença</button>
+      <button class="nudge" onclick="quick('Hallo, ich suche ein Penthouse in Port d’Andratx')">🇩🇪 Penthouse Andratx</button>
+    </div>
+
+    <div class="composer">
+      <input id="input" placeholder="Nachricht schreiben… (DE / EN / ES)" autocomplete="off"
+             onkeydown="if(event.key==='Enter')send()">
+      <button onclick="send()" aria-label="Senden">→</button>
+    </div>
+    <div class="powered">betrieben mit KI · <b>nøho studio</b></div>
+  </div>
+
+<script>
+/* ---------------- config ---------------- */
+const API = (location.protocol === 'file:') ? 'http://localhost:8000' : '';
+let LIVE = false;
+let messages = [];   // {role, content}
+let lead = null;
+
+const GREETING = "¡Hola! Hello! Hallo! 👋 Ich bin Marisol, die digitale Assistentin von Mar y Sol. Ich helfe Ihnen auf Deutsch, English oder Español, das passende Objekt auf Mallorca zu finden. Wonach suchen Sie?";
+
+/* ---------------- ui ---------------- */
+function openChat(){
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('launcher').style.display='none';
+  if(messages.length===0){ addBot(GREETING); }
+  document.getElementById('input').focus();
+}
+function closeChat(){
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('launcher').style.display='flex';
+}
+function el(cls,txt){const d=document.createElement('div');d.className=cls;d.textContent=txt;return d;}
+function scroll(){const m=document.getElementById('msgs');m.scrollTop=m.scrollHeight;}
+function addBot(t){document.getElementById('msgs').appendChild(el('msg bot',t));scroll();}
+function addMe(t){document.getElementById('msgs').appendChild(el('msg me',t));scroll();}
+function typing(on){
+  const m=document.getElementById('msgs');
+  let t=document.getElementById('typing');
+  if(on && !t){t=document.createElement('div');t.id='typing';t.className='typing';t.innerHTML='<i></i><i></i><i></i>';m.appendChild(t);scroll();}
+  if(!on && t)t.remove();
+}
+function quick(t){document.getElementById('input').value=t;send();}
+
+const LABELS={name:'Name',intent:'Vorhaben',area:'Lage',budget:'Budget',bedrooms:'Schlafzimmer',timeline:'Zeitrahmen',contact:'Kontakt'};
+function renderLead(){
+  if(!lead) return;
+  const box=document.getElementById('lead'); box.classList.add('show');
+  const rows=document.getElementById('leadRows'); rows.innerHTML='';
+  for(const k of ['name','intent','area','budget','bedrooms','timeline','contact']){
+    const v=(lead[k]&&lead[k].trim())?lead[k]:'—';
+    const d=document.createElement('div'); d.innerHTML=`<span>${LABELS[k]}</span><b>${v}</b>`; rows.appendChild(d);
+  }
+  const q=document.getElementById('qBadge');
+  if(lead.qualified){q.textContent='qualifiziert ✓';q.classList.remove('no');}
+  else{q.textContent='offen';q.classList.add('no');}
+}
+
+/* ---------------- send ---------------- */
+async function send(){
+  const inp=document.getElementById('input'); const text=inp.value.trim();
+  if(!text) return; inp.value='';
+  addMe(text); messages.push({role:'user',content:text});
+  typing(true);
+  let data;
+  try{
+    if(LIVE){
+      const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({messages})});
+      if(!r.ok) throw new Error('api '+r.status);
+      data=await r.json();
+    }else{ data=fallbackBrain(messages); }
+  }catch(e){ data=fallbackBrain(messages); }
+  typing(false);
+  addBot(data.reply);
+  messages.push({role:'assistant',content:data.reply});
+  if(data.lead){ lead={...data.lead, qualified:data.qualified}; renderLead(); }
+}
+
+/* ---------------- demo brain (offline fallback) ---------------- */
+function detectLang(t){
+  t=' '+t.toLowerCase()+' ';
+  if(/[áéíóúñ¿¡]|hola|busco|gracias|quiero|piscina|habitacion|playa|vista al mar/.test(t))return'es';
+  if(/\b(the|looking|hello|hi|want|please|budget|near|sea view|bedroom)\b/.test(t))return'en';
+  return'de';
+}
+function pull(history,re){for(let i=history.length-1;i>=0;i--){if(history[i].role==='user'){const m=history[i].content.match(re);if(m)return m;}}return null;}
+function scanLead(history){
+  const all=history.filter(m=>m.role==='user').map(m=>m.content).join('  ').toLowerCase();
+  const L={name:'',intent:'',area:'',budget:'',bedrooms:'',timeline:'',contact:''};
+  if(/\b(kaufen|comprar|\bbuy\b|kauf|purchase)\b/.test(all))L.intent='kaufen';
+  else if(/\b(mieten|alquil|\brent\b|miete)\b/.test(all))L.intent='mieten';
+  else if(/\b(verkauf|vender|\bsell\b)\b/.test(all))L.intent='verkaufen';
+  const towns=['port d','andratx','santa ponça','santa ponca','pollença','pollensa','palma','deià','deia','sóller','soller','calvià','calvia','santanyí','santanyi','alcúdia','alcudia'];
+  for(const t of towns){if(all.includes(t)){L.area=t.replace(/\b\w/g,c=>c.toUpperCase());break;}}
+  const b=all.match(/(\d[\d.,]*)\s*(mio|mill|m\b|k\b|€|euro)/);
+  if(b)L.budget=b[0].toUpperCase().replace('EURO','€');
+  const bd=all.match(/(\d)\s*(schlafzimmer|zimmer|bedroom|bed|habitaci|dormitor)/);
+  if(bd)L.bedrooms=bd[1];
+  const em=all.match(/[\w.+-]+@[\w-]+\.[\w.-]+/); if(em)L.contact=em[0];
+  L.qualified=!!(L.intent && L.area && (L.budget||L.bedrooms));
+  return L;
+}
+function fallbackBrain(history){
+  const last=history[history.length-1].content;
+  const lang=detectLang(last);
+  const L=scanLead(history);
+  const missing=[];
+  if(!L.area)missing.push('area'); if(!L.budget)missing.push('budget'); if(!L.bedrooms)missing.push('beds'); if(!L.contact)missing.push('contact');
+  const ask={
+    de:{area:'In welcher Region oder welchem Ort auf Mallorca suchen Sie?',budget:'Welcher Budgetrahmen passt für Sie?',beds:'Wie viele Schlafzimmer sollten es sein?',contact:'Gerne sende ich Ihnen passende Objekte — wie erreiche ich Sie am besten (E-Mail)?'},
+    en:{area:'Which area or town on Mallorca are you interested in?',budget:'What budget range are you considering?',beds:'How many bedrooms are you looking for?',contact:'I’d be happy to send matching listings — what’s the best email to reach you?'},
+    es:{area:'¿En qué zona o pueblo de Mallorca le interesa?',budget:'¿Qué presupuesto tiene en mente?',beds:'¿Cuántos dormitorios busca?',contact:'Con gusto le envío propiedades — ¿cuál es su mejor correo de contacto?'}
+  }[lang];
+  const ack={
+    de:'Sehr gerne. ', en:'Of course. ', es:'Con mucho gusto. '
+  }[lang];
+  let reply;
+  if(missing.length){
+    reply=ack+(ask[missing[0]]);
+  }else{
+    reply={de:`Perfekt — ich habe alles, was ich brauche. Ein Kollege meldet sich kurzfristig bei Ihnen unter ${L.contact} mit passenden Objekten in ${L.area}. Bis dahin: gracias und bis bald!`,
+           en:`Perfect — I have everything I need. A colleague will reach out shortly at ${L.contact} with matching properties in ${L.area}. Talk soon!`,
+           es:`Perfecto — tengo todo lo necesario. Un colega le escribirá en breve a ${L.contact} con propiedades en ${L.area}. ¡Hasta pronto!`}[lang];
+  }
+  return {reply, language:lang, lead:L, qualified:L.qualified};
+}
+
+/* ---------------- health check ---------------- */
+(async()=>{
+  try{
+    const r=await fetch(API+'/api/health'); const j=await r.json();
+    if(j.live){ LIVE=true;
+      const s=document.getElementById('status'); s.classList.remove('demo'); s.classList.add('live');
+      document.getElementById('statusText').textContent='Live-KI · Claude';
+    }
+  }catch(e){ /* stays in demo mode */ }
+})();
+</script>
+</body>
+</html>
