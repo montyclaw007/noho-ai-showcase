@@ -35,10 +35,14 @@ def forward_lead(text):
         data = json.loads(text)
         if not data.get("qualified"):
             return
+        lead = data.get("lead", {})
+        details = " · ".join(str(v).strip() for k, v in lead.items()
+                             if k not in ("name", "contact") and str(v).strip())
         payload = json.dumps({
             "branche": BRANCHE, "bot": BOT,
             "language": data.get("language", ""),
-            "lead": data.get("lead", {}), "qualified": True,
+            "name": lead.get("name", ""), "contact": lead.get("contact", ""),
+            "details": details, "lead": lead, "qualified": True,
         }).encode("utf-8")
         req = urllib.request.Request(MAKE_WEBHOOK, data=payload,
                                      headers={"Content-Type": "application/json"}, method="POST")
